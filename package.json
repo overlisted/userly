@@ -1,0 +1,15 @@
+{
+  "name": "userly",
+  "main": "index.js",
+  "scripts": {},
+  "author": "overlisted",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "express-promise-router": "^4.0.1",
+    "pg": "^8.5.1",
+    "uuid": "^8.3.2"
+  }
+}

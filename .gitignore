@@ -1,0 +1,8 @@
+node_modules/
+
+# stuff
+.idea/
+.DS_Store
+*.iml
+*~
+\#*#
