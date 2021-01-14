@@ -4,6 +4,7 @@
   "scripts": {},
   "author": "overlisted",
   "private": true,
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "body-parser": "^1.19.0",
     "crypto": "^1.0.1",
