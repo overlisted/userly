@@ -5,7 +5,7 @@ const tokens = require("./token");
 const toHash = password => crypto.createHash("sha256").update(password).digest("hex");
 
 const check = {
-  hash: async (hash, password) => toHash(password) === hash.toString("hex"),
+  hash: (hash, password) => toHash(password) === hash.toString("hex"),
   byEmail: async (email, password) => {
     const { rows } = await db.query("SELECT password FROM users WHERE email = $1", [email]);
     return check.hash(rows[0].password.toString("hex"), password);
