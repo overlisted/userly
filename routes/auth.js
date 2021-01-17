@@ -8,9 +8,9 @@ module.exports = router;
 
 router.use(bodyParser.json());
 
-// POST /auth/register(email: string, username: string, password: string): void
+// POST /auth/signup(email: string, username: string, password: string): void
 // -> { 200, 400: ["Email taken", "Username taken", "No password"] }
-router.post("/register", async (req, res) => {
+router.post("/signup", async (req, res) => {
   const json = req.body;
 
   if(await users.username.exists(json.username)) {
