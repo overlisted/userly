@@ -18,7 +18,7 @@ const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+")
 // -> { 200, 400: [1, 6, 10, 8, 7, 3, 9, 5] }
 router.post("/signup", async (req, res) => {
   const json = req.body;
-  const [hasErrors, requestErrors] = await test.form(json, {
+  const requestErrors = await test.form(json, {
     email: async ({email}, test) => {
       test(!emailRegex.test(email), formErrors.email.MALFORMED);
       test(await users.email.exists(email), formErrors.email.TAKEN);
@@ -37,7 +37,7 @@ router.post("/signup", async (req, res) => {
     },
   });
 
-  if(hasErrors) {
+  if(requestErrors) {
     res.status(400);
     res.send(JSON.stringify(requestErrors));
   } else {
@@ -52,7 +52,7 @@ router.post("/signup", async (req, res) => {
 // -> { 200, 400: [2, 4] }
 router.post("/login", async (req, res) => {
   const json = req.body;
-  const [hasErrors, requestErrors] = await test.form(json, {
+  const requestErrors = await test.form(json, {
     email: async ({email}, test) => {
       test(!await users.email.exists(email), formErrors.email.UNKNOWN);
     },
@@ -61,7 +61,7 @@ router.post("/login", async (req, res) => {
     },
   });
 
-  if(hasErrors) {
+  if(requestErrors) {
     res.status(400);
     res.send(JSON.stringify(requestErrors));
   } else {
@@ -79,7 +79,7 @@ router.patch("/changePassword", authValidator, async (req, res) => {
   const json = req.body;
   const token = req.headers.authorization;
 
-  const [hasErrors, requestErrors] = await test.form(json, {
+  const requestErrors = await test.form(json, {
     password: async ({email, password}, test) => {
       test(!await passwords.check.byEmail(json.email, json.password), formErrors.password.WRONG);
     },
@@ -92,7 +92,7 @@ router.patch("/changePassword", authValidator, async (req, res) => {
     },
   });
 
-  if(hasErrors) {
+  if(requestErrors) {
     res.status(400);
     res.send(JSON.stringify(requestErrors));
   } else {

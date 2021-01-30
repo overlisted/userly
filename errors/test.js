@@ -17,7 +17,7 @@ const form = async (fields, tests) => {
     )
   }
 
-  return [hasErrors, errors]
+  if(hasErrors) return errors;
 };
 
 module.exports = {
