@@ -4,7 +4,12 @@ const createRoutes = require("./routes");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true,
+  optionsSuccessStatus: 200
+}));
+
 createRoutes(app);
 
 app.listen(80);
