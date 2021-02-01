@@ -43,7 +43,7 @@ router.post("/signup", async (req, res) => {
   } else {
     await users.newUser(json.email, json.username, json.newPassword);
     res.status(200);
-    res.end();
+    res.send({});
   }
 });
 
