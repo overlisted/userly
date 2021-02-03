@@ -2,7 +2,7 @@
   "name": "userly",
   "main": "index.js",
   "scripts": {
-    "run": "node index.js",
+    "start": "node ./index.js",
     "test": "jest"
   },
   "author": "overlisted",
