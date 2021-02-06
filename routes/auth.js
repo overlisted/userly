@@ -47,8 +47,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Returns the session token of a user
-// POST /auth/login(email: string, password: string): string
+// POST /auth/login(email: string, password: string): {token: string}
 // -> { 200, 400: [2, 4] }
 router.post("/login", async (req, res) => {
   const json = req.body;
@@ -66,14 +65,13 @@ router.post("/login", async (req, res) => {
     res.send(JSON.stringify(requestErrors));
   } else {
     res.status(200);
-    res.send(await tokens.fromUserOrNew(await users.id.byEmail(json.email)));
+    res.send({token: await tokens.fromUserOrNew(await users.id.byEmail(json.email))});
   }
 });
 
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// Returns a new refreshed token
-// PATCH @auth /auth/changePassword(password: string, newPassword: string, newPasswordRepeat: string): string
+// PATCH @auth /auth/changePassword(password: string, newPassword: string, newPasswordRepeat: string): {token: string}
 // -> { 200, 400: [4, 3, 9, 5] }
 router.patch("/changePassword", authValidator, async (req, res) => {
   const json = req.body;
@@ -99,6 +97,6 @@ router.patch("/changePassword", authValidator, async (req, res) => {
     await passwords.update.byToken(token, json.newPassword);
 
     res.status(200);
-    res.send(await tokens.renew(token));
+    res.send({token: await tokens.renew(token)});
   }
 });
