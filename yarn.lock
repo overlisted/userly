@@ -1664,6 +1664,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "dotenv@npm:8.2.0"
+  checksum: 16cb89cbd7b98b053899b8aba8c5044c8fb61a2db8a81fe70360b75035fce5fed53bd7a34d772be717d0880c0321122a4c09423f518025e1b52d96791521b1a7
+  languageName: node
+  linkType: hard
+
 "ecc-jsbn@npm:~0.1.1":
   version: 0.1.2
   resolution: "ecc-jsbn@npm:0.1.2"
@@ -5313,6 +5320,7 @@ fsevents@^2.1.2:
     body-parser: ^1.19.0
     cors: ^2.8.5
     crypto: ^1.0.1
+    dotenv: ^8.2.0
     express: ^4.17.1
     express-promise-router: ^4.0.1
     jest: ^26.6.3
