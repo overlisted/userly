@@ -1,0 +1,3 @@
+PGUSER=me                                                # postgresql username
+PGPASSWORD=123                                           # postgresql password
+PGDATABASE=userly_example                                # postgresql database name
