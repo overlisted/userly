@@ -23,6 +23,7 @@ router.post("/signup", async (req, res) => {
     username: async ({username}, test) => {
       test(username.length < 3, formErrors.username.TOO_SHORT);
       test(username.length > 14, formErrors.username.TOO_LONG);
+      test(!users.username.validateContent(username), formErrors.username.MALFORMED);
       test(await users.username.exists(username), formErrors.username.TAKEN);
     },
     newPassword: async ({newPassword}, test) => {

@@ -18,7 +18,10 @@ const id = {
 
 // i guess it should cover enough emails?
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const usernameContentRegex = /^[a-zA-Z_0-9]{3,18}$/;
+
 const username = {
+  validateContent: username => usernameContentRegex.test(username),
   exists: async username => {
     const { rows } = await db.query("SELECT * FROM users WHERE username = $1", [username]);
     return rows.length > 0;

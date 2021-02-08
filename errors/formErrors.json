@@ -37,6 +37,10 @@
     "TAKEN": {
       "code": 7,
       "message": "Username taken"
+    },
+    "MALFORMED": {
+      "code": 10,
+      "message": "Malformed username"
     }
   },
   "newPassword": {
