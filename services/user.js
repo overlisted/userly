@@ -16,6 +16,8 @@ const id = {
   }
 };
 
+// i guess it should cover enough emails?
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const username = {
   exists: async username => {
     const { rows } = await db.query("SELECT * FROM users WHERE username = $1", [username]);
@@ -24,6 +26,7 @@ const username = {
 };
 
 const email = {
+  validate: email => emailRegex.test(email),
   exists: async email => {
     const { rows } = await db.query("SELECT * FROM users WHERE email = $1", [email]);
     return rows.length > 0;

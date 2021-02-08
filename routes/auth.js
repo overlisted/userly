@@ -11,16 +11,13 @@ module.exports = router;
 
 router.use(bodyParser.json());
 
-// i guess it should cover enough emails?
-const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
 // POST /auth/signup(email: string, username: string, newPasswordRepeat: string): void
 // -> { 200, 400: [1, 6, 10, 8, 7, 3, 9, 5] }
 router.post("/signup", async (req, res) => {
   const json = req.body;
   const requestErrors = await validation.form(json, {
     email: async ({email}, test) => {
-      test(!emailRegex.test(email), formErrors.email.MALFORMED);
+      test(!users.email.validate(email), formErrors.email.MALFORMED);
       test(await users.email.exists(email), formErrors.email.TAKEN);
     },
     username: async ({username}, test) => {
