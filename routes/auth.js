@@ -1,6 +1,6 @@
 const Router = require("express-promise-router");
 const bodyParser = require("body-parser");
-const { users, tokens, passwords } = require("../services");
+const { users, tokens, passwords, emailVerification } = require("../services");
 const authValidator = require("./middleware/auth");
 const validation = require("../errors/validation");
 
@@ -39,7 +39,7 @@ router.post("/signup", async (req, res) => {
     res.status(400);
     res.send(JSON.stringify(requestErrors));
   } else {
-    await users.newUser(json.email, json.username, json.newPassword);
+    await emailVerification.beginVerification(json.email, json.username, json.newPassword);
     res.status(200);
     res.send({});
   }
@@ -96,5 +96,22 @@ router.patch("/changePassword", authValidator, async (req, res) => {
 
     res.status(200);
     res.send({token: await tokens.renew(token)});
+  }
+});
+
+// POST /auth/verifyEmail(ticket: string): void
+// -> { 200, 400: ["Unknown ticket"] }
+router.post("/verifyEmail", async (req, res) => {
+  const json = req.body;
+
+  try {
+    await emailVerification.verify(json.ticket);
+    res.status(200);
+    res.send({});
+  } catch(e) {
+    if(e === 404) {
+      res.status(400);
+      res.send({"error": "Unknown ticket"});
+    }
   }
 });
