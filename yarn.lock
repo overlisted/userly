@@ -3754,6 +3754,13 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+"nodemailer@npm:^6.4.17":
+  version: 6.4.17
+  resolution: "nodemailer@npm:6.4.17"
+  checksum: 2031aa60ea495f4e014d7236a9dd91dd7189b7b014c3edec63f1483bb975f1eb92730de495fa23317ec61c21eded62d310ac058eb20401188467cc11396386e9
+  languageName: node
+  linkType: hard
+
 "nopt@npm:^5.0.0":
   version: 5.0.0
   resolution: "nopt@npm:5.0.0"

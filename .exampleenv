@@ -1,3 +1,7 @@
 PGUSER=me                                                # postgresql username
 PGPASSWORD=123                                           # postgresql password
 PGDATABASE=userly_example                                # postgresql database name
+SMTP_USER=me                                             # smtp server username
+SMTP_PASSWORD=123                                        # smtp server password
+SMTP_HORT=localhost                                      # smtp server
+SMTP_PORT=25                                             # smtp server port
