@@ -100,7 +100,7 @@ router.patch("/changePassword", authValidator, async (req, res) => {
 });
 
 // POST /auth/verifyEmail(ticket: string): void
-// -> { 200, 400: ["Unknown ticket"] }
+// -> { 200, 400: [11] }
 router.post("/verifyEmail", async (req, res) => {
   const json = req.body;
 
@@ -111,7 +111,7 @@ router.post("/verifyEmail", async (req, res) => {
   } catch(e) {
     if(e === 404) {
       res.status(400);
-      res.send({"error": "Unknown ticket"});
+      res.send(formErrors.ticket.UNKNOWN);
     }
   }
 });

@@ -52,5 +52,11 @@
       "code": 9,
       "english_name": "Too long"
     }
+  },
+  "ticket": {
+    "UNKNOWN": {
+      "code": 11,
+      "english_name": "Unknown"
+    }
   }
 }
