@@ -11,7 +11,7 @@ module.exports = router;
 
 router.use(bodyParser.json());
 
-// POST /auth/signup(email: string, username: string, newPasswordRepeat: string): void
+// POST /auth/signup(email: string, username: string, newPassword: string, newPasswordRepeat: string): void
 // -> { 200, 400: [1, 6, 10, 8, 7, 3, 9, 5] }
 router.post("/signup", async (req, res) => {
   const json = req.body;
