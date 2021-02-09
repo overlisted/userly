@@ -99,9 +99,9 @@ router.patch("/changePassword", authValidator, async (req, res) => {
   }
 });
 
-// POST /auth/verifyEmail(ticket: string): void
+// POST /auth/signup/verifyEmail(ticket: string): void
 // -> { 200, 400: [11] }
-router.post("/verifyEmail", async (req, res) => {
+router.post("/signup/verifyEmail", async (req, res) => {
   const json = req.body;
 
   try {
