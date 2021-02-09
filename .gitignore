@@ -16,3 +16,4 @@
 
 .env
 verificationEmail.pug
+passwordResetEmail.pug

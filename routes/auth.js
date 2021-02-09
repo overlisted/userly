@@ -1,6 +1,6 @@
 const Router = require("express-promise-router");
 const bodyParser = require("body-parser");
-const { users, tokens, passwords, emailVerification } = require("../services");
+const { users, tokens, passwords, emailVerification, passwordReset } = require("../services");
 const authValidator = require("./middleware/auth");
 const validation = require("../errors/validation");
 
@@ -112,6 +112,49 @@ router.post("/signup/verifyEmail", async (req, res) => {
     if(e === 404) {
       res.status(400);
       res.send(formErrors.ticket.UNKNOWN);
+    }
+  }
+});
+
+// POST /auth/login/resetPassword(email: string): void
+// -> { 200 }
+router.post("/login/resetPassword", async (req, res) => {
+  const json = req.body;
+
+  await passwordReset.beginReset(json.email);
+
+  res.status(200);
+  res.send({})
+});
+
+// POST /auth/login/resetPassword/confirm(ticket: string, newPassword: string, newPasswordRepeat: string): void
+// -> { 200, 400: [3, 9, 5, 11] }
+router.post("/login/resetPassword/confirm", async (req, res) => {
+  const json = req.body;
+  const requestErrors = await validation.form(json, {
+    newPassword: async ({newPassword}, test) => {
+      test(newPassword.length < 8, formErrors.newPassword.TOO_SHORT);
+      test(newPassword.length > 32, formErrors.newPassword.TOO_LONG);
+    },
+    newPasswordRepeat: async ({newPassword, newPasswordRepeat}, test) => {
+      test(newPassword !== newPasswordRepeat, formErrors.newPasswordRepeat.DOESNT_MATCH);
+    },
+  });
+
+  if(requestErrors) {
+    res.status(400);
+    res.send(JSON.stringify(requestErrors));
+  } else {
+    try {
+      await passwordReset.reset(json.ticket, json.newPassword);
+
+      res.status(200);
+      res.send({})
+    } catch(e) {
+      if(e === 404) {
+        res.status(400);
+        res.send(formErrors.ticket.UNKNOWN);
+      }
     }
   }
 });

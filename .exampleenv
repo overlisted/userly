@@ -5,4 +5,5 @@ SMTP_USER=me                                             # smtp server username
 SMTP_PASSWORD=123                                        # smtp server password
 SMTP_HORT=localhost                                      # smtp server
 SMTP_PORT=25                                             # smtp server port
-EMAIL_VERIFICATION_FROM="Example <verif@example.com>"    # "From" field in email verifications
+EMAIL_VERIFICATION_FROM="Example <security@example.com>" # "From" field in email verifications
+PASSWORD_RESETS_FROM="Example <security@example.com>"    # "From" field in password resets
